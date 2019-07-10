@@ -1,0 +1,21 @@
+.label {
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.datepicker-container {
+  width: 45%;
+}
+
+.datepicker-group {
+  display: flex;
+  justify-content: space-between;
+
+  .datepicker-container {
+    width: 49%;
+  }
+}
