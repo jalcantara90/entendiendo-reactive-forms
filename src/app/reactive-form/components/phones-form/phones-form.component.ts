@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'phones-form',
@@ -8,22 +8,14 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class PhonesFormComponent implements OnInit {
 
-  phones: number[] = [1];
+  @Input() phones: number[];
+  @Output() addPhone: EventEmitter<void> = new EventEmitter<void>();
+  @Output() removePhone: EventEmitter<number> = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  addPhone() {
-    if (this.phones.length < 3) {
-      this.phones.push(1);
-    }
-  }
 
-  removePhone(index: number) {
-    if (this.phones.length > 1) {
-      this.phones.splice(index, 1);
-    }
-  }
 }

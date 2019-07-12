@@ -3,7 +3,7 @@
   <nb-card>
     <nb-card-body>
       <basic-form></basic-form>
-      <phones-form></phones-form>
+      <phones-form [phones]="phones" (addPhone)="addPhone()" (removePhone)="removePhone($event)"></phones-form>
       <options-form></options-form>
     </nb-card-body>
   </nb-card>

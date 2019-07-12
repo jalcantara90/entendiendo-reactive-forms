@@ -5,10 +5,10 @@
     <div class="numbers-container">
       <div class="number-item" *ngFor="let phone of phones; let i = index">
         <input nbInput type="number"/>
-        <button (click)="removePhone(i); $event.preventDefault()" *ngIf="phones.length !== 1" nbButton ghost status="danger"><nb-icon icon="trash-outline"></nb-icon></button>
+        <button (click)="removePhone.emit(i); $event.preventDefault()" *ngIf="phones.length !== 1" nbButton ghost status="danger"><nb-icon icon="trash-outline"></nb-icon></button>
       </div>
     </div>
 
-    <button [disabled]="phones.length > 2" (click)="addPhone(); $event.preventDefault()" hero nbButton status="success"><nb-icon icon="plus"></nb-icon></button>
+    <button [disabled]="phones.length > 2" (click)="addPhone.emit(); $event.preventDefault()" hero nbButton status="success"><nb-icon icon="plus"></nb-icon></button>
   </div>
 </section>
