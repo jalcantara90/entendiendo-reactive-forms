@@ -1,14 +1,19 @@
-<section>
+<section [formGroup]="form">
   <label class="label" for="name">Telefono: </label>
 
   <div class="form-group">
     <div class="numbers-container">
-      <div class="number-item" *ngFor="let phone of phones; let i = index">
-        <input nbInput type="number"/>
-        <button (click)="removePhone.emit(i); $event.preventDefault()" *ngIf="phones.length !== 1" nbButton ghost status="danger"><nb-icon icon="trash-outline"></nb-icon></button>
+      <div formArrayName="phones"
+        class="number-item"
+        *ngFor="let phone of form.get('phones')['controls']; let i = index;">
+        <input [formControl]="form.get('phones')['controls'][i]" nbInput type="number"/>
+        <button
+          (click)="removePhone.emit(i); $event.preventDefault()"
+          *ngIf="form.get('phones')['controls'].length !== 1"
+          nbButton ghost status="danger"><nb-icon icon="trash-outline"></nb-icon></button>
       </div>
     </div>
 
-    <button [disabled]="phones.length > 2" (click)="addPhone.emit(); $event.preventDefault()" hero nbButton status="success"><nb-icon icon="plus"></nb-icon></button>
+    <button [disabled]="form.get('phones')['controls'].length > 2" (click)="addPhone.emit(); $event.preventDefault()" hero nbButton status="success"><nb-icon icon="plus"></nb-icon></button>
   </div>
 </section>

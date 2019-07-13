@@ -1,37 +1,37 @@
-<section>
+<section [formGroup]="form">
   <div class="form-group">
     <label class="label" for="name">Nombre: </label>
-    <input nbInput fullWidth="true" type="text"/>
+    <input formControlName="name" nbInput fullWidth="true" type="text"/>
   </div>
   <div class="form-group">
     <label class="label" for="email">Correo electrónico: </label>
-    <input nbInput fullWidth="true" type="email"/>
+    <input formControlName="email" nbInput fullWidth="true" type="email"/>
   </div>
   <div class="form-group">
     <label class="label" for="password">Contraseña: </label>
-    <input nbInput fullWidth="true" type="text"/>
+    <input formControlName="password" nbInput fullWidth="true" type="password"/>
   </div>
   <div class="form-group">
     <label class="label" for="confirmPassword">Confirmar contraseña: </label>
-    <input nbInput fullWidth="true" type="text"/>
+    <input formControlName="confirmPassword" nbInput fullWidth="true" type="password"/>
   </div>
 
   <div class="form-group datepicker-group">
     <div class="datepicker-container">
       <label class="label" for="spam">Fecha inicio: </label>
-      <input fullWidth="true" nbInput [nbDatepicker]="from">
+      <input fullWidth="true" formControlName="from" nbInput [nbDatepicker]="from" >
       <nb-datepicker #from></nb-datepicker>
     </div>
 
     <div class="datepicker-container">
       <label class="label" for="spam">Fecha fin: </label>
-      <input fullWidth="true" nbInput [nbDatepicker]="to" >
+      <input fullWidth="true" formControlName="to" nbInput [nbDatepicker]="to" >
       <nb-datepicker #to></nb-datepicker>
     </div>
   </div>
 
   <div class="form-group">
-    <nb-checkbox status="danger">Añadir números de teléfono.</nb-checkbox>
+    <nb-checkbox formControlName="hasPhones" name="hasPhones" status="danger">Añadir números de teléfono.</nb-checkbox>
   </div>
 
 </section>

@@ -8,6 +8,7 @@ import { NebularModule } from '../nebular/nebular.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OptionsFormComponent } from './components/options-form/options-form.component';
 import { PhonesFormComponent } from './components/phones-form/phones-form.component';
+import { NbDatepickerModule } from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { PhonesFormComponent } from './components/phones-form/phones-form.compon
   imports: [
     CommonModule,
     ReactiveFormRoutingModule,
-    NebularModule
+    NebularModule,
+    ReactiveFormsModule,
+    NbDatepickerModule
   ]
 })
 export class ReactiveFormModule { }

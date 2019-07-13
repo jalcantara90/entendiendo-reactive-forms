@@ -31,7 +31,6 @@ const nebularModules = [
   imports: [
     CommonModule,
     NbThemeModule.forRoot({ name: 'cosmic' }),
-    NbDatepickerModule.forRoot(),
     nebularModules
   ],
   exports: [nebularModules, NbDatepickerModule]
