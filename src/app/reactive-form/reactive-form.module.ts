@@ -11,13 +11,15 @@ import { OptionsFormComponent } from './components/options-form/options-form.com
 import { PhonesFormComponent } from './components/phones-form/phones-form.component';
 import { NbDatepickerModule } from '@nebular/theme';
 import { MockService } from './services/mock.service';
+import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.component';
 
 @NgModule({
   declarations: [
     FormContainerComponent,
     BasicFormComponent,
     OptionsFormComponent,
-    PhonesFormComponent
+    PhonesFormComponent,
+    VehicleFormComponent
   ],
   imports: [
     CommonModule,

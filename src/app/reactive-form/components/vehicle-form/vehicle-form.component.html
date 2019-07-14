@@ -1,0 +1,37 @@
+<section [formGroup]="form">
+  <div class="form-group" style="width:25%;">
+    <label class="label" for="vehicle">Tipo vehículo: </label>
+    <nb-select placeholder="Select Showcase" formControlName="vehicle">
+      <nb-option value="hasNotVehicle">No tengo vehículo</nb-option>
+      <nb-option value="car">Coche</nb-option>
+      <nb-option value="moto">Moto</nb-option>
+    </nb-select>
+  </div>
+
+  <ng-container [ngSwitch]="form.get('vehicle').value">
+    <ng-container *ngSwitchCase="'car'" [ngTemplateOutlet]="car"></ng-container>
+    <ng-container *ngSwitchCase="'moto'" [ngTemplateOutlet]="moto"></ng-container>
+  </ng-container>
+</section>
+
+<ng-template #moto>
+  <section [formGroup]="form">
+    <div class="form-group">
+      <label class="label" for="plate">Matrícula: </label>
+      <input formControlName="plate" nbInput fullWidth="true" type="text"/>
+    </div>
+  </section>
+</ng-template>
+
+<ng-template #car>
+  <section [formGroup]="form">
+    <div class="form-group">
+      <label class="label" for="plate">Matrícula: </label>
+      <input formControlName="plate" nbInput fullWidth="true" type="text"/>
+    </div>
+    <div class="form-group">
+      <label class="label" for="manyDors">Número de puertas: </label>
+      <input formControlName="manyDors" nbInput fullWidth="true" type="number"/>
+    </div>
+  </section>
+</ng-template>

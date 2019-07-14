@@ -5,8 +5,9 @@
       <nb-card>
         <nb-card-body>
           <basic-form [form]="form"></basic-form>
-          <phones-form [form]="form" (addPhone)="addPhone()" (removePhone)="removePhone($event)"></phones-form>
+          <phones-form *ngIf="form.get('hasPhones').value" [form]="form" (addPhone)="addPhone()" (removePhone)="removePhone($event)"></phones-form>
           <options-form [form]="form"></options-form>
+          <vehicle-form [form]="form"></vehicle-form>
         </nb-card-body>
       </nb-card>
 
