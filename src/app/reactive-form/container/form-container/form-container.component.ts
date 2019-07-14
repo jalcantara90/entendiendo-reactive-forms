@@ -7,7 +7,8 @@ import {
   AbstractControl,
   ValidatorFn,
   AsyncValidatorFn,
-  ValidationErrors
+  ValidationErrors,
+  FormBuilder
 } from '@angular/forms';
 import { MockService } from '../../services/mock.service';
 import { Observable, Subscription } from 'rxjs';
@@ -26,27 +27,29 @@ export class FormContainerComponent implements OnInit, OnDestroy {
 
   constructor(
     private mockService: MockService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
-    this.form = new FormGroup({
-      name: new FormControl('', [ Validators.required]),
-      email: new FormControl('', [
-        Validators.required,
-        Validators.email,
-        Validators.pattern(/@(\w*gmail)/)
-      ], [
+    this.form = this.fb.group({
+      name: ['', [Validators.required] ],
+      email: ['',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern(/@(\w*gmail)/)
+        ],
         this.emailRegistered().bind(this),
         this.emailRegisteredWithoutDependencies(this.mockService)
-      ]),
-      password: new FormControl('', [ Validators.required, Validators.minLength(4) ]),
-      confirmPassword: new FormControl('', [ Validators.required, Validators.minLength(4) ]),
-      from: new FormControl(),
-      to: new FormControl(),
-      hasPhones: new FormControl(false),
-      options: new FormControl(null, [ Validators.required]),
-      terms: new FormControl(null, [ Validators.requiredTrue ]),
-      vehicle: new FormControl('hasNotVehicle')
+      ],
+      password: ['', [Validators.required, Validators.minLength(4) ]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(4) ]],
+      from: [''],
+      to: [''],
+      hasPhones: [false],
+      options: [null, [Validators.required]],
+      terms: [null, [Validators.requiredTrue]],
+      vehicle: ['hasNotVehicle']
     }, { validators: this.confirmedPassword() });
 
     this.hasPhonesSubscription = this.form.get('hasPhones').valueChanges.pipe(
@@ -66,7 +69,7 @@ export class FormContainerComponent implements OnInit, OnDestroy {
     if (this.phones.controls.length < 3) {
       this.phones.insert(
         this.phones.controls.length,
-        new FormControl(null, Validators.required)
+        this.fb.control(null, [Validators.required])
       );
     }
   }
@@ -85,9 +88,9 @@ export class FormContainerComponent implements OnInit, OnDestroy {
     if (hasPhones) {
       this.form.addControl(
          'phones',
-         new FormArray([
-          new FormControl(null, Validators.required )
-        ], { validators: this.allFormControlsAreValid() })
+         this.fb.array([
+           this.fb.control(null, [Validators.required])
+         ], { validators: this.allFormControlsAreValid() })
       );
     } else {
       this.form.removeControl('phones');
@@ -98,12 +101,12 @@ export class FormContainerComponent implements OnInit, OnDestroy {
     switch (value) {
       case 'car':
         this.removeVehicleControls();
-        this.form.addControl('plate', new FormControl(null, Validators.required) );
-        this.form.addControl('manyDors', new FormControl(0, Validators.required) );
+        this.form.addControl('plate', this.fb.control(null, Validators.required) );
+        this.form.addControl('manyDors', this.fb.control(0, Validators.required) );
         break;
       case 'moto':
         this.removeVehicleControls();
-        this.form.addControl('plate', new FormControl(null, Validators.required) );
+        this.form.addControl('plate', this.fb.control(null, Validators.required) );
         break;
       default:
         this.removeVehicleControls();
