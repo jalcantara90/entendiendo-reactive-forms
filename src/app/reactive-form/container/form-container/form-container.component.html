@@ -13,10 +13,10 @@
       <div class="form-actions">
         <ul>
           <li>
-            <button nbButton hero status="info">Enviar</button>
+            <button  nbButton hero status="info">Enviar</button>
           </li>
           <li>
-            <button nbButton hero status="danger">Reiniciar</button>
+            <button (click)="resetForm(); $event.preventDefault()" nbButton hero status="danger">Reiniciar</button>
           </li>
         </ul>
       </div>

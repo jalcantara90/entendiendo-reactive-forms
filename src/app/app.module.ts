@@ -4,8 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbDatepickerModule } from '@nebular/theme';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
+import {  NbDatepickerModule } from '@nebular/theme';
 import { NebularModule } from './nebular/nebular.module';
 
 @NgModule({
@@ -17,7 +16,7 @@ import { NebularModule } from './nebular/nebular.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     NebularModule,
-    NbDatepickerModule.forRoot()
+    NbDatepickerModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

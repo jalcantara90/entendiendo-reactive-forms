@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ReactiveFormRoutingModule } from './reactive-form-routing.module';
 import { FormContainerComponent } from './container/form-container/form-container.component';
@@ -9,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { OptionsFormComponent } from './components/options-form/options-form.component';
 import { PhonesFormComponent } from './components/phones-form/phones-form.component';
 import { NbDatepickerModule } from '@nebular/theme';
+import { MockService } from './services/mock.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { NbDatepickerModule } from '@nebular/theme';
     ReactiveFormRoutingModule,
     NebularModule,
     ReactiveFormsModule,
-    NbDatepickerModule
-  ]
+    NbDatepickerModule,
+    HttpClientModule
+  ],
+  providers: [ MockService ]
 })
 export class ReactiveFormModule { }

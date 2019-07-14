@@ -10,7 +10,9 @@ import {
   NbRadioModule,
   NbSelectModule,
   NbDatepickerModule,
-  NbIconModule
+  NbIconModule,
+  NbProgressBarModule,
+  NbSpinnerModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -23,7 +25,8 @@ const nebularModules = [
   NbCheckboxModule,
   NbRadioModule,
   NbSelectModule,
-  NbIconModule
+  NbIconModule,
+  NbSpinnerModule
 ];
 
 @NgModule({
