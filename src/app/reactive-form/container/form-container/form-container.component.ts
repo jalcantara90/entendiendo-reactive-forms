@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray, Validators, AbstractControl, ValidatorFn, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
-import { MockService } from '../../services/mock.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { FormGroup, FormControl, FormArray, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
+
 
 @Component({
   selector: 'form-container',
@@ -12,9 +10,7 @@ import { map } from 'rxjs/operators';
 export class FormContainerComponent implements OnInit {
 
   public form: FormGroup;
-  constructor(
-    private mockService: MockService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -23,9 +19,6 @@ export class FormContainerComponent implements OnInit {
         Validators.required,
         Validators.email,
         Validators.pattern(/@(\w*gmail)/)
-      ], [
-        this.emailRegistered().bind(this),
-        this.emailRegisteredWithoutDependencies(this.mockService)
       ]),
       password: new FormControl('', [ Validators.required, Validators.minLength(4) ]),
       confirmPassword: new FormControl('', [ Validators.required, Validators.minLength(4) ]),
@@ -90,22 +83,4 @@ export class FormContainerComponent implements OnInit {
 
   /* End Validatos */
 
-  /* Async Validators */
-  emailRegistered(): AsyncValidatorFn {
-    return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-      return this.mockService.getMockData().pipe(
-        map( res => ( res.some( resItem => resItem.email === control.value) ) ? {emailRegistered: true} : null )
-      );
-    };
-  }
-
-  // It can be defined in validators files and just need to set as param the instance of the service
-  emailRegisteredWithoutDependencies(service: MockService): AsyncValidatorFn {
-    return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-      return service.getMockData().pipe(
-        map( res => ( res.some( resItem => resItem.email === control.value) ) ? {emailRegisteredWithoutDependency: true} : null )
-      );
-    };
-  }
-  /* End Async Valdiators */
 }

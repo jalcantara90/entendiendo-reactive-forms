@@ -5,12 +5,7 @@
   </div>
   <div class="form-group">
     <label class="label" for="email">Correo electrónico: </label>
-    <div [nbSpinner]="form.get('email').pending" nbSpinnerStatus="warning">
-      <input  formControlName="email" nbInput fullWidth="true" type="email"/>
-    </div>
-    <p style="color: red" *ngIf="form.controls['email'].errors?.emailRegistered">
-      El correo ya está registrado
-    </p>
+    <input  formControlName="email" nbInput fullWidth="true" type="email"/>
   </div>
   <div class="form-group">
     <label class="label" for="password">Contraseña: </label>
