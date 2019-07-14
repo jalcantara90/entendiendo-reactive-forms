@@ -8,7 +8,7 @@
     <div [nbSpinner]="form.get('email').pending" nbSpinnerStatus="warning">
       <input  formControlName="email" nbInput fullWidth="true" type="email"/>
     </div>
-    <p style="color: red" *ngIf="form.controls['email'].errors?.emailRegistered">
+    <p style="color: red" *ngIf="form.controls['email'].errors?.emailRegisteredWithoutDependency">
       El correo ya está registrado
     </p>
   </div>

@@ -13,6 +13,8 @@ import {
 import { MockService } from '../../services/mock.service';
 import { Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { BasicForm, PhonesForm } from '../../models/form.model';
+import { emailRegisteredWithoutDependencies, confirmedPassword, allFormControlsAreValid } from '../../validators/validators-functions';
 
 @Component({
   selector: 'form-container',
@@ -31,26 +33,13 @@ export class FormContainerComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.form = this.fb.group({
-      name: ['', [Validators.required] ],
-      email: ['',
-        [
-          Validators.required,
-          Validators.email,
-          Validators.pattern(/@(\w*gmail)/)
-        ],
-        this.emailRegistered().bind(this),
-        this.emailRegisteredWithoutDependencies(this.mockService)
-      ],
-      password: ['', [Validators.required, Validators.minLength(4) ]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(4) ]],
-      from: [''],
-      to: [''],
-      hasPhones: [false],
-      options: [null, [Validators.required]],
-      terms: [null, [Validators.requiredTrue]],
-      vehicle: ['hasNotVehicle']
-    }, { validators: this.confirmedPassword() });
+
+    this.form = this.fb.group(new BasicForm());
+
+    this.form.get('email').setAsyncValidators([
+      emailRegisteredWithoutDependencies(this.mockService)
+    ]);
+    this.form.setValidators(confirmedPassword);
 
     this.hasPhonesSubscription = this.form.get('hasPhones').valueChanges.pipe(
       tap((value) => this.tooglePhones(value))
@@ -86,12 +75,8 @@ export class FormContainerComponent implements OnInit, OnDestroy {
 
   tooglePhones( hasPhones: boolean ): void {
     if (hasPhones) {
-      this.form.addControl(
-         'phones',
-         this.fb.array([
-           this.fb.control(null, [Validators.required])
-         ], { validators: this.allFormControlsAreValid() })
-      );
+      this.form = this.fb.group( new PhonesForm(this.form.getRawValue()) );
+      this.form.get('phones').setValidators(allFormControlsAreValid);
     } else {
       this.form.removeControl('phones');
     }
@@ -123,26 +108,6 @@ export class FormContainerComponent implements OnInit, OnDestroy {
     this.form.reset();
   }
 
-  /* Validatos */
-
-  confirmedPassword(): ValidatorFn {
-    return (group: FormGroup): ValidationErrors => {
-      if (group.get('password').value !== group.get('confirmPassword').value) {
-        return { notSamePassword: 'Password and confirm password has to be the same.' };
-      }
-      return null;
-    };
-  }
-
-  allFormControlsAreValid(): ValidatorFn {
-    return (formArray: FormArray): ValidationErrors => {
-      if (formArray.controls.every( control => control.valid ) ) {
-        return null;
-      }
-
-      return { notValidPhone: 'Some phone is not valid' };
-    };
-  }
 
   /* End Validatos */
 
