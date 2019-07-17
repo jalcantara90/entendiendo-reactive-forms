@@ -65,7 +65,7 @@ export class FormContainerComponent implements OnInit {
   confirmedPassword(): ValidatorFn {
     return (group: FormGroup): ValidationErrors => {
       if (group.get('password').value !== group.get('confirmPassword').value) {
-        return { notSamePassword: 'Password and confirm password has to be the same.' };
+        return { notSamePassword: 'Password and password confirmation have to be the same.' };
       }
       return null;
     };
