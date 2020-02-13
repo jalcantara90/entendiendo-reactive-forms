@@ -16,6 +16,7 @@ export class BasicForm {
   options: FormControl = new FormControl(null, [ Validators.required]);
   terms: FormControl = new FormControl(null, [ Validators.requiredTrue ]);
   vehicle: FormControl = new FormControl('hasNotVehicle');
+  counter: FormControl = new FormControl();
 
   constructor(data?: any) {
     if (data) {
@@ -33,6 +34,7 @@ export class BasicForm {
       this.options = new FormControl(data.options, [ Validators.required]);
       this.terms = new FormControl(data.terms, [ Validators.requiredTrue ]);
       this.vehicle = new FormControl(data.vehicle);
+      this.counter = new FormControl(data.counter);
     } else {
       this.name = new FormControl('', [ Validators.required]);
       this.email = new FormControl('', [
@@ -48,6 +50,7 @@ export class BasicForm {
       this.options = new FormControl(null, [ Validators.required]);
       this.terms = new FormControl(null, [ Validators.requiredTrue ]);
       this.vehicle = new FormControl('hasNotVehicle');
+      this.counter = new FormControl(0);
     }
   }
 }
